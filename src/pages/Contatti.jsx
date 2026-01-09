@@ -2,15 +2,16 @@ import { Linkedin, Instagram, Phone, MessageCircle } from 'lucide-react';
 
 export function Contatti() {
   return (
-    <div style={{ maxWidth: '1000px', margin: '0 auto', textAlign: 'center' }}>
-      
-      <div style={{ marginBottom: '3rem', marginTop: '2rem' }}>
+    // AGGIUNTO padding-top: '8rem' per evitare che la navbar copra il titolo
+    <div style={{ maxWidth: '1000px', margin: '0 auto', textAlign: 'center', paddingTop: '8rem' }}>
+
+      <div style={{ marginBottom: '3rem' }}>
         <h1 style={{ color: 'var(--primary)', fontSize: '2.5rem', marginBottom: '0.5rem' }}>Contattaci</h1>
         <p style={{ color: 'var(--text-muted)', fontSize: '1.1rem' }}>Scegli il modo più comodo per parlare con noi</p>
       </div>
 
       <div className="services-grid">
-        
+
         {/* Box Chiama */}
         <div className="card-service">
           <div className="icon-wrapper">
@@ -62,7 +63,7 @@ export function Contatti() {
           <p style={{ color: 'var(--text-muted)', marginBottom: '1.5rem' }}>
             Scopri le nostre attività e i retroscena dello studio.
           </p>
-          <a href="#" target="_blank" className="btn btn-social" style={{ backgroundColor: '#E1306C', color: 'white' }}>
+          <a href="https://www.instagram.com/damacondomini?igsh=MXhlempwbDlpYzlleA==" target="_blank" className="btn btn-social" style={{ backgroundColor: '#E1306C', color: 'white' }}>
             SEGUICI
           </a>
         </div>

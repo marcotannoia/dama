@@ -1,15 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&display=swap');
 
 :root {
-  --primary: #b91c1c;   
+  --primary: #b91c1c;
   --primary-hover: #991b1b;
   --accent: #1e293b;
-  
+
   --bg-body: #f8fafc;
   --bg-card: #ffffff;
   --text-main: #334155;
   --text-muted: #64748b;
-  
+
   --radius: 20px;
   --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
 }
@@ -18,13 +18,13 @@
   --primary: #ef4444;
   --primary-hover: #dc2626;
   --accent: #f1f5f9;
-  
+
   --bg-body: #0f172a;
   --bg-card: #1e293b;
-  
+
   --text-main: #f8fafc;
   --text-muted: #cbd5e1;
-  
+
   --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
 }
 
@@ -39,39 +39,6 @@ body {
   overflow-x: hidden;
 }
 
-/* NAVBAR */
-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-  background: var(--bg-card);
-  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
-
-.logo {
-  font-weight: 900;
-  font-size: 1.6rem;
-  color: var(--primary);
-  text-decoration: none;
-  letter-spacing: -0.5px;
-}
-
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-}
-.nav-links a {
-  text-decoration: none;
-  color: var(--text-main);
-  font-weight: 600;
-}
-.nav-links a:hover { color: var(--primary); }
-
 /* HERO */
 .hero-section {
   display: flex;
@@ -79,16 +46,16 @@ nav {
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 4rem 2rem 2rem 2rem;
+  padding: 10rem 2rem 4rem 2rem;
   width: 100%;
 }
 
 .hero-huge-text {
   font-family: 'Montserrat', sans-serif;
-  font-weight: 900; 
+  font-weight: 900;
   line-height: 1.1;
   margin-bottom: 1rem;
-  font-size: clamp(3rem, 8vw, 6rem) !important; 
+  font-size: clamp(3rem, 8vw, 6rem) !important;
 }
 
 .hero-subtitle {
@@ -100,7 +67,7 @@ nav {
 /* BANNER */
 .banner-section {
   width: 90%;
-  max-width: 1200px; 
+  max-width: 1200px;
   height: 250px;
   margin: 2rem auto 5rem auto;
   border-radius: var(--radius);
@@ -114,7 +81,7 @@ nav {
 /* GRIGLIA INTELLIGENTE */
 .services-grid {
   display: grid;
-  gap: 4rem; /* Spazio abbondante tra le card */
+  gap: 4rem;
   margin-top: 3rem;
   justify-content: center;
   padding: 0 2rem;
@@ -125,15 +92,13 @@ nav {
 }
 
 @media (min-width: 1100px) {
-  /* Di base 3 colonne per i servizi (3+3) */
   .services-grid {
-    grid-template-columns: repeat(3, 1fr); 
+    grid-template-columns: repeat(3, 1fr);
   }
-  
-  /* 🟢 FIX CONTATTI: Se ci sono 4 elementi, usa 2 colonne (2+2) */
+
   .services-grid:has(> :nth-last-child(4):first-child) {
     grid-template-columns: repeat(2, 1fr);
-    max-width: 900px; /* Stringe un po' per tenerli vicini */
+    max-width: 900px;
   }
 }
 
@@ -158,12 +123,12 @@ nav {
   display: inline-flex;
 }
 
-/* 🟢 FIX BOTTONI (Che avevo cancellato per sbaglio) */
+/* BOTTONI */
 .btn {
   display: block;
   width: 100%;
   padding: 1.2rem;
-  margin-top: auto; /* Spinge il bottone in fondo */
+  margin-top: auto;
   border-radius: 12px;
   border: none;
   font-size: 1rem;
@@ -210,8 +175,41 @@ nav {
   border-top: 1px solid rgba(0,0,0,0.05);
 }
 
+.theme-floating-btn {
+  position: absolute;
+  top: 1.5rem;
+  right: 2rem;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 1px solid rgba(0,0,0,0.1);
+  color: var(--text-main);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  
+  /* FIX 1: Z-Index altissimo per essere sempre cliccabile sopra la navbar */
+  z-index: 2000; 
+  
+  transition: transform 0.2s, background-color 0.3s;
+}
+
+.theme-floating-btn:hover {
+  transform: scale(1.1);
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+/* FIX MOBILE: Posizionamento corretto a sinistra del menu */
 @media (max-width: 768px) {
-  nav { flex-direction: column; gap: 1rem; }
-  .hero-huge-text { font-size: 2.5rem !important; }
-  .services-grid { gap: 2rem; grid-template-columns: 1fr !important; } /* 1 colonna su mobile */
+  .theme-floating-btn {
+    top: 1rem;     
+    right: 5rem;   /* Spostato a sinistra per non toccare il menu burger */
+    width: 42px;
+    height: 42px;
+  }
 }
