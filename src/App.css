@@ -1,42 +1,217 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&display=swap');
+
+:root {
+  --primary: #b91c1c;   
+  --primary-hover: #991b1b;
+  --accent: #1e293b;
+  
+  --bg-body: #f8fafc;
+  --bg-card: #ffffff;
+  --text-main: #334155;
+  --text-muted: #64748b;
+  
+  --radius: 20px;
+  --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme='dark'] {
+  --primary: #ef4444;
+  --primary-hover: #dc2626;
+  --accent: #f1f5f9;
+  
+  --bg-body: #0f172a;
+  --bg-card: #1e293b;
+  
+  --text-main: #f8fafc;
+  --text-muted: #cbd5e1;
+  
+  --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+}
+
+/* Transizioni globali fluide */
+*, *::before, *::after {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  overflow-x: hidden;
+}
+
+/* NAVBAR */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: var(--bg-card);
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  font-weight: 900;
+  font-size: 1.6rem;
+  color: var(--primary);
+  text-decoration: none;
+  letter-spacing: -0.5px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.nav-links a {
+  text-decoration: none;
+  color: var(--text-main);
+  font-weight: 600;
+}
+.nav-links a:hover { color: var(--primary); }
+
+/* HERO */
+.hero-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 4rem 2rem 2rem 2rem;
+  width: 100%;
+}
+
+.hero-huge-text {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900; 
+  line-height: 1.1;
+  margin-bottom: 1rem;
+  font-size: clamp(3rem, 8vw, 6rem) !important; 
+}
+
+.hero-subtitle {
+  font-size: 1.3rem;
+  color: var(--text-muted);
+  max-width: 600px;
+}
+
+/* BANNER */
+.banner-section {
+  width: 90%;
+  max-width: 1200px; 
+  height: 250px;
+  margin: 2rem auto 5rem auto;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: white;
+}
+
+/* GRIGLIA INTELLIGENTE */
+.services-grid {
+  display: grid;
+  gap: 4rem; /* Spazio abbondante tra le card */
+  margin-top: 3rem;
+  justify-content: center;
+  padding: 0 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 1100px) {
+  /* Di base 3 colonne per i servizi (3+3) */
+  .services-grid {
+    grid-template-columns: repeat(3, 1fr); 
   }
-  to {
-    transform: rotate(360deg);
+  
+  /* 🟢 FIX CONTATTI: Se ci sono 4 elementi, usa 2 colonne (2+2) */
+  .services-grid:has(> :nth-last-child(4):first-child) {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 900px; /* Stringe un po' per tenerli vicini */
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* CARD */
+.card-service {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 2.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
 }
 
-.card {
-  padding: 2em;
+.icon-wrapper {
+  color: var(--primary);
+  margin-bottom: 1.5rem;
+  background: rgba(185, 28, 28, 0.1);
+  padding: 1.2rem;
+  border-radius: 50%;
+  display: inline-flex;
 }
 
-.read-the-docs {
-  color: #888;
+/* 🟢 FIX BOTTONI (Che avevo cancellato per sbaglio) */
+.btn {
+  display: block;
+  width: 100%;
+  padding: 1.2rem;
+  margin-top: auto; /* Spinge il bottone in fondo */
+  border-radius: 12px;
+  border: none;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: opacity 0.2s, transform 0.2s;
+  text-align: center;
+}
+
+.btn:hover { opacity: 0.9; transform: scale(1.02); }
+
+.btn-studio { background-color: var(--primary); color: white; }
+.btn-whatsapp { background-color: #25D366; color: white; }
+.btn-social { background-color: var(--accent); color: var(--bg-card); }
+
+.theme-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-main);
+  padding: 0.5rem;
+}
+
+/* MAPPA / FOOTER SECTION */
+.map-section {
+  background: var(--bg-card);
+  padding: 1rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin: 6rem auto 4rem auto;
+  max-width: 1000px;
+  width: 90%;
+}
+
+.site-footer {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-top: auto;
+  border-top: 1px solid rgba(0,0,0,0.05);
+}
+
+@media (max-width: 768px) {
+  nav { flex-direction: column; gap: 1rem; }
+  .hero-huge-text { font-size: 2.5rem !important; }
+  .services-grid { gap: 2rem; grid-template-columns: 1fr !important; } /* 1 colonna su mobile */
 }

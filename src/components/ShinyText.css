@@ -1,0 +1,29 @@
+.shiny-text {
+  display: inline-block;
+  /* Crea un gradiente largo il doppio del testo: Colore Base -> Riflesso -> Colore Base */
+  background-image: linear-gradient(
+    120deg, 
+    var(--shiny-color) 40%, 
+    var(--shiny-shine) 50%, 
+    var(--shiny-color) 60%
+  );
+  background-size: 200% auto;
+  
+  /* Taglia lo sfondo seguendo la forma del testo */
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  
+  /* L'animazione infinita */
+  animation: shine-move var(--shiny-speed) linear infinite;
+}
+
+@keyframes shine-move {
+  0% {
+    background-position: 100% center;
+  }
+  100% {
+    background-position: -100% center;
+  }
+}
