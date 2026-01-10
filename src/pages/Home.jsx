@@ -1,82 +1,107 @@
-import { Building2, ClipboardCheck, Percent, BookOpen, Droplet, HandCoins } from 'lucide-react';
-import ShinyText from '../components/ShinyText';
-import bannerImage from '../images/dama.png';
-
-// 1. IMPORTA LA TUA IMMAGINE QUI (Assicurati che il file esista!)
-// Se non hai ancora la foto, usa questo link di prova:
-
-// import bannerImage from '../assets/banner.jpg'; 
+import mainBanner from '../images/cerignola.jpg'; // Assicurati che il nome file sia corretto
+import imgCompetenza from '../images/competenza.png';    
+import imgTrasparenza from '../images/trasparenza.jpg';   
+import imgProfessionalita from '../images/professionalita.jpg'; 
+import imgStudio from '../images/dama.png';        
 
 export function Home() {
-  const services = [
-    { title: "Amministrazione Condominiale", icon: <Building2 size={32}/>, text: "Gestione trasparente e professionale del tuo immobile." },
-    { title: "Revisione Bilanci per conto terzi", icon: <ClipboardCheck size={32}/>, text: "Analisi accurata e verifica contabile dei bilanci condominiali." },
-    { title: "Redazione Tabelle Millesimali", icon: <Percent size={32}/>, text: "Calcolo preciso delle quote di proprietà e ripartizione spese." },
-    { title: "Stesura Regolamenti Condominiali", icon: <BookOpen size={32}/>, text: "Redazione di norme chiare per la convivenza civile." },
-    { title: "Pratiche Acquedotto Pugliese", icon: <Droplet size={32}/>, text: "Gestione volture, allacci e problematiche idriche." },
-    { title: "Recupero Crediti", icon: <HandCoins size={32}/>, text: "Gestione efficace delle morosità e delle pratiche legali." },
+  
+  const coreValues = [
+    { 
+      title: "COMPETENZA", 
+      image: imgCompetenza, 
+
+    },
+    { 
+      title: "TRASPARENZA", 
+      image: imgTrasparenza, 
+    },
+    { 
+      title: "PROFESSIONALITÀ", 
+      image: imgProfessionalita, 
+  
+    }
   ];
 
   return (
     <div>
-      {/* HERO SECTION */}
-      <div className="hero-section">
-        <div className="hero-huge-text">
-          <ShinyText 
-            text={<>DA.MA.<br />GIUSEPPE TANNOIA</>} 
-            speed={4} 
-            color="#991b1b" 
-            shineColor="#ff4d4d" 
-            spread={180} 
-            direction="right" 
-          />
-        </div>
-        <p className="hero-subtitle">Professionalità e competenza al tuo servizio</p>
-      </div>
-
-      {/* --- NUOVO BANNER FOTOGRAFICO --- */}
-      {/* Passiamo l'immagine come background tramite style in linea */}
+      {/* 1. HERO BANNER */}
       <div 
-        className="banner-section" 
-        style={{ backgroundImage: `url(${bannerImage})` }}
+        className="hero-full-width" 
+        style={{ backgroundImage: `url(${mainBanner})` }} 
       >
-      </div>
-      {/* -------------------------------- */}
-
-      {/* SERVIZI */}
-      <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-        <h3 style={{ color: 'var(--primary)', fontSize: '2rem', marginBottom: '0.5rem', fontWeight: '700' }}>
-          I Nostri Servizi
-        </h3>
-        <p style={{color: 'var(--text-muted)', fontSize: '1.1rem'}}>
-          Tutto ciò di cui il tuo condominio ha bisogno
-        </p>
+        <div className="hero-overlay" style={{ backgroundColor: 'rgba(0,0,0,0.6)' }}></div>
         
-        <div className="services-grid">
-          {services.map((service, index) => (
-            <div key={index} className="card-service">
-              <div className="icon-wrapper">
-                {service.icon}
-              </div>
-              <h3 style={{margin: '0.5rem 0', color: 'var(--text-main)'}}>{service.title}</h3>
-              <p style={{fontSize: '0.95rem', color: 'var(--text-muted)', margin: 0}}>{service.text}</p>
-            </div>
-          ))}
+        <div className="hero-content">
+          <h1 className="hero-title">
+            AMMINISTRAZIONE<br />CONDOMINIALE
+          </h1>
+          <p className="hero-subtitle-text">
+            DA.MA. SRLS - Giuseppe Tannoia
+          </p>
         </div>
       </div>
 
-      {/* MAPPA */}
-      <div className="map-section">
-        <h2 style={{color: 'var(--primary)', marginBottom: '0.5rem'}}>Ci troviamo qui!</h2>
-        <p style={{color: 'var(--text-muted)'}}>Vieni a trovarci in studio per una consulenza.</p>
-        <div style={{ marginTop: '2rem', borderRadius: '16px', overflow: 'hidden', border: '1px solid #e2e8f0' }}>
+      {/* 2. INTRO */}
+      <div className="intro-section">
+        <p className="intro-text">
+          "L'esperienza e la formazione costante su ogni argomento riguardante la materia condominiale,
+          consentono di offrire un servizio di amministrazione di assoluto livello.
+          <br /><br />
+          Tutta l'attività è incentrata sui seguenti principi cardine:"
+        </p>
+      </div>
+
+      {/* 3. GRIGLIA VALORI (Senza bottoni "Scopri di più") */}
+      <div className="values-grid">
+        {coreValues.map((val, index) => (
+          <div key={index} className="value-card">
+            <div className="value-image-box">
+              <img src={val.image} alt={val.title} />
+            </div>
+            <h3 className="value-title">{val.title}</h3>
+            <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', marginBottom: '0' }}>{val.desc}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* 4. SEZIONE STUDIO */}
+      <div className="studio-section-wrapper">
+        <div className="studio-container">
+          <div className="studio-text-col">
+            <h2 className="section-title">Lo Studio DA.MA.</h2>
+            <p>
+              Siamo un punto di riferimento per l'amministrazione immobiliare. 
+              Il nostro obiettivo è garantire la <strong>massima serenità</strong> ai condomini attraverso una gestione trasparente e moderna.
+            </p>
+            <p>
+              Ci avvaliamo di collaboratori esperti e software all'avanguardia per monitorare guasti, contabilità e scadenze in tempo reale.
+            </p>
+            <div style={{ marginTop: '2rem' }}>
+               <a href="/contatti" className="btn btn-studio" style={{ maxWidth: '200px' }}>CONTATTACI</a>
+            </div>
+          </div>
+          <div className="studio-img-col">
+            <img src={imgStudio} alt="Interno Studio" />
+          </div>
+        </div>
+      </div>
+
+      {/* 5. MAPPA */}
+      <div className="map-section" style={{ textAlign: 'center', marginBottom: '4rem' }}>
+        <p className="intro-divider" style={{ marginBottom: '2rem' }}>
+          Dove ci trovi:
+        </p>     
+        <div style={{ marginTop: '2rem', borderRadius: '4px', overflow: 'hidden', border: '1px solid #e2e8f0' }}>
           <iframe 
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3005.123!2d16.8!3d41.1!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDHCsDA2JzAwLjAiTiAxNsKwNDgnMDAuMCJF!5e0!3m2!1sit!2sit!4v1234567890" 
             width="100%" 
-            height="350" 
-            style={{border:0}} 
+            height="400" 
+            style={{ border: 0 }} 
             allowFullScreen="" 
-            loading="lazy">
+            loading="lazy"
+            title="Mappa Studio"
+          >
           </iframe>
         </div>
       </div>

@@ -1,65 +1,43 @@
-import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import { Sun, Moon } from 'lucide-react';
+
+// Pagine
 import { Home } from './pages/Home';
 import { Contatti } from './pages/Contatti';
+import { ChiSiamo } from './pages/ChiSiamo'; 
+import { Servizi } from './pages/Servizi';   
+
+// Componenti
 import PillNav from './components/PillNav';
-import logo from './images/dama.png'; // Percorso immagine
+import logo from './images/dama.png'; 
 import './App.css';
 
-// Componente Wrapper per passare la location corrente alla Navbar
 const AppContent = () => {
-  const [theme, setTheme] = useState('light');
-  const location = useLocation(); // Serve per evidenziare il link attivo
+  const location = useLocation(); 
 
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    setTheme(savedTheme);
-    document.documentElement.setAttribute('data-theme', savedTheme);
-  }, []);
-
-  const toggleTheme = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light';
-    setTheme(newTheme);
-    document.documentElement.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
-  };
-
-  // Voci del menu
   const navItems = [
     { label: 'Home', href: '/' },
+    { label: 'Chi Siamo', href: '/chisiamo' },
+    { label: 'Servizi', href: '/servizi' },    
     { label: 'Contatti', href: '/contatti' },
-    // Aggiungi altre voci se vuoi, es: { label: 'Servizi', href: '/#servizi' }
   ];
 
   return (
     <div className="app-wrapper">
       
-      {/* 1. NUOVA NAVBAR PILL */}
+      {/* NAVBAR */}
       <PillNav
         logo={logo}
         items={navItems}
         activeHref={location.pathname}
-        initialLoadAnimation={true}
-        // COLORI PERSONALIZZATI DA.MA.
-        baseColor="var(--primary)"         // Il cerchio rosso
-        pillColor="var(--bg-card)"         // Lo sfondo delle pillole (Bianco/Scuro)
-        pillTextColor="var(--text-main)"   // Testo
-        hoveredPillTextColor="#ffffff"     // Testo quando passi sopra (Bianco su sfondo rosso)
       />
 
-      {/* 2. BOTTONE TEMA FLOTTANTE (Spostato perché non entra nella nav) */}
-      <button 
-        onClick={toggleTheme} 
-        className="theme-floating-btn" 
-        title="Cambia tema"
-      >
-        {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
-      </button>
+      {/* NIENTE PIÙ BOTTONE LUNA/SOLE */}
 
       <div className="container">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/chisiamo" element={<ChiSiamo />} /> 
+          <Route path="/servizi" element={<Servizi />} />   
           <Route path="/contatti" element={<Contatti />} />
         </Routes>
       </div>

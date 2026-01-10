@@ -1,180 +1,153 @@
-/* CONTAINER PRINCIPALE */
+/* CONTAINER NAVBAR - IL PADRE CHE COMANDA */
 .pill-nav-container {
-  position: absolute;
-  top: 1.5rem;
-  left: 50%; 
-  transform: translateX(-50%);
-  z-index: 3000; /* Z-INDEX ALTISSIMO: Vince su tutto, anche sul bottone tema */
-  width: max-content;
-}
-
-@media (max-width: 768px) {
-  .pill-nav-container {
-    width: auto;
-    left: 50%;
-    transform: translateX(-50%); /* Centriamo la pillola anche su mobile */
-    top: 1rem;
-    padding: 0;
-    pointer-events: auto; /* Deve essere cliccabile perché ora ha uno sfondo */
-  }
-}
-
-/* NAVBAR STYLE */
-.pill-nav {
-  --nav-h: 48px; 
-  --logo: 40px;
-  --pill-pad-x: 22px;
-  --pill-gap: 4px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--nav-height, 90px);
+  padding: 0 5%;
+  z-index: 10000;
   
+  /* LAYOUT FLEXBOX PERFETTO */
+  display: flex;
+  align-items: center; /* <--- QUESTO è il comando che centra tutto verticalmente */
+  justify-content: space-between;
+  
+  background-color: #ffffff;
+  box-shadow: 0 2px 15px rgba(0,0,0,0.04);
+}
+
+/* Wrapper invisibile (necessario per React Router/DOM structure) */
+.pill-nav { display: contents; }
+
+/* 1. LOGO */
+.pill-logo {
   display: flex;
   align-items: center;
-  box-sizing: border-box;
-  
-  /* ESTETICA PILLOLA COMUNE (PC e Mobile) */
-  /* Se vuoi che su mobile abbia lo sfondo a "capsula" come su PC, definiamolo qui */
-}
-
-@media (max-width: 768px) {
-  .pill-nav {
-    /* MOBILE: Creiamo la capsula carina */
-    background: var(--pill-bg, #fff); /* Sfondo bianco/scuro */
-    border-radius: 9999px;            /* Forma a pillola */
-    padding: 4px 6px;                 /* Spazio interno */
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1); /* Ombra elegante */
-    
-    width: auto;
-    gap: 15px; /* Spazio tra logo e burger */
-    border: 1px solid rgba(0,0,0,0.05); /* Bordino sottile */
-  }
-}
-
-/* LOGO */
-.pill-logo {
-  width: var(--nav-h);
-  height: var(--nav-h);
-  border-radius: 50%;
-  background: var(--base, #000); /* Sfondo rosso per il logo */
-  padding: 8px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  flex-shrink: 0;
-}
-
-@media (max-width: 768px) {
-  .pill-logo {
-    /* Su mobile il logo è dentro la pillola, quindi niente margine strano */
-    margin: 0;
-  }
+  /* Rimuoviamo altezze fisse esagerate, lasciamo fare al flex */
+  height: auto; 
+  max-height: 55px; /* Limite massimo altezza immagine */
+  z-index: 10002;
+  margin-right: auto;
 }
 
 .pill-logo img {
-  width: 100%;
-  height: 100%;
+  height: 50px; /* Dimensione controllata dell'immagine */
+  width: auto;
   object-fit: contain;
-  display: block;
+  display: block; /* Rimuove spazi fantasma sotto l'immagine */
 }
 
-/* MENU DESKTOP */
+/* 2. MENU DESKTOP */
 .pill-nav-items {
-  position: relative;
+  /* MODIFICA FONDAMENTALE: Rimosso height: 100% */
+  /* Ora il div è alto solo quanto serve, e il padre lo centra */
   display: flex;
   align-items: center;
-  height: var(--nav-h);
-  background: var(--base, #000);
-  border-radius: 9999px;
-  padding: 0 4px;
-  margin-left: 10px;
+  margin: 0;
 }
 
 .pill-list {
-  list-style: none; display: flex; align-items: stretch; gap: var(--pill-gap); margin: 0; padding: 3px; height: 100%;
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  margin: 0; /* Reset fondamentale */
+  padding: 0; /* Reset fondamentale */
+  align-items: center;
+  line-height: 1; /* Previene spaziature verticali extra nei testi */
 }
-.pill-list > li { display: flex; height: 100%; }
 
+/* --- STILE PULSANTE (Link) --- */
 .pill {
-  display: inline-flex; align-items: center; justify-content: center; height: 100%; padding: 0 var(--pill-pad-x);
-  background: var(--pill-bg, #fff); color: var(--pill-text, var(--base, #000));
-  text-decoration: none; border-radius: 9999px; box-sizing: border-box;
-  font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px;
-  white-space: nowrap; cursor: pointer; position: relative; overflow: hidden;
+  position: relative;
+  text-decoration: none;
   font-family: 'Montserrat', sans-serif;
-}
-
-/* Animazioni Hover (Invariate) */
-.pill .hover-circle { position: absolute; left: 50%; bottom: 0; border-radius: 50%; background: var(--base, #000); z-index: 1; pointer-events: none; }
-.pill .label-stack, .pill .pill-label { position: relative; z-index: 2; line-height: 1; }
-.pill .pill-label-hover { position: absolute; left: 0; top: 0; color: var(--hover-text, #fff); z-index: 3; }
-.pill.is-active::after { content: ''; position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); width: 6px; height: 6px; background: var(--base, #000); border-radius: 50px; z-index: 4; }
-
-.desktop-only { display: block; }
-.mobile-only { display: none; }
-@media (max-width: 768px) { .desktop-only { display: none; } .mobile-only { display: block; } }
-
-/* HAMBURGER MENU */
-.mobile-menu-button {
-  width: 40px; /* Un po' più piccolo su mobile */
-  height: 40px;
-  border-radius: 50%;
-  background: transparent; /* Sfondo trasparente dentro la pillola */
-  border: none;
-  display: none;
-  flex-direction: column;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #334155; 
+  
+  /* Forma della pillola */
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px; /* Spazio tra le righe */
-  cursor: pointer;
-  padding: 0;
+  
+  /* Padding bilanciato */
+  padding: 12px 24px;
+  border-radius: 50px;
+  
+  transition: color 0.3s ease;
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* --- SFONDO ROSSO (Fade In) --- */
+.pill-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #b91c1c; 
+  border-radius: 50px;
+  z-index: -1; 
+  
+  /* Invisibile di base */
+  opacity: 0; 
+  transform: scale(1);
+  transition: opacity 0.3s ease;
+}
+
+/* HOVER STATES */
+.pill:hover, .pill.is-active {
+  color: #ffffff; 
+}
+
+.pill:hover .pill-bg, .pill.is-active .pill-bg {
+  opacity: 1; 
+}
+
+/* Label Text */
+.pill-label {
   position: relative;
-  flex-shrink: 0;
+  z-index: 2;
+  /* Un piccolo fix ottico per Montserrat che spesso sembra "alto" */
+  transform: translateY(1px); 
 }
 
-@media (max-width: 768px) {
-  .mobile-menu-button { display: flex; }
-}
 
-.hamburger-line {
-  width: 20px; 
-  height: 2px;
-  background: var(--pill-text, #000); /* Colore del testo (nero/bianco) invece che bianco fisso */
-  border-radius: 2px; 
-  transition: none; /* Gestito da GSAP */
+/* --- MOBILE STUFF --- */
+.desktop-only { display: block; }
+.mobile-only { display: none; }
+
+.mobile-menu-button {
+  width: 44px; height: 44px;
+  background: transparent; border: none;
+  display: none; 
+  flex-direction: column; justify-content: center; gap: 6px;
+  cursor: pointer; z-index: 10002; padding: 0;
+}
+.hamburger-line { width: 26px; height: 3px; background: #1e293b; border-radius: 3px; }
+
+@media (max-width: 900px) {
+  .pill-nav-container { padding: 0 1.5rem; height: 80px; }
+  .pill-logo img { height: 40px; } /* Logo più piccolo su mobile */
+  .desktop-only, .pill-nav-items { display: none !important; }
+  .mobile-only, .mobile-menu-button { display: flex; }
 }
 
 /* MENU POPOVER MOBILE */
 .mobile-menu-popover {
-  position: absolute;
-  top: 4.5rem; /* Poco sotto la pillola */
-  left: 50%;
-  transform: translateX(-50%);
-  width: 200px; /* Larghezza contenuta */
-  background: var(--pill-bg, #fff);
-  border: 1px solid rgba(0,0,0,0.1);
-  border-radius: 20px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-  z-index: 2999; /* Sotto la pillola ma sopra il resto */
-  opacity: 0;
-  visibility: hidden;
-  padding: 8px;
-  text-align: center;
+  position: fixed;
+  top: 80px; left: 0; width: 100%;
+  background: #ffffff;
+  border-top: 1px solid rgba(0,0,0,0.05); border-bottom: 1px solid rgba(0,0,0,0.05);
+  padding: 1rem 0; z-index: 9999; text-align: center;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+  visibility: hidden; opacity: 0; 
 }
-
-.mobile-menu-list {
-  list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px;
-}
-
-.mobile-menu-popover .mobile-menu-link {
-  display: block; padding: 12px;
-  color: var(--pill-text);
-  text-decoration: none;
-  font-size: 15px; font-weight: 700;
-  border-radius: 12px; transition: all 0.2s ease;
-  text-transform: uppercase;
-}
-
-.mobile-menu-popover .mobile-menu-link:active,
-.mobile-menu-popover .mobile-menu-link:hover {
-  background-color: var(--base); /* Rosso */
-  color: #fff;
+.mobile-menu-link {
+  display: block; padding: 15px; color: #334155; 
+  text-decoration: none; font-weight: 700; text-transform: uppercase;
 }

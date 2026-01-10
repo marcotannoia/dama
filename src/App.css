@@ -1,215 +1,255 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
 
+/* --- VARIABILI GLOBALI (Solo Chiaro) --- */
 :root {
-  --primary: #b91c1c;
+  --primary: #b91c1c;       
   --primary-hover: #991b1b;
-  --accent: #1e293b;
+  --accent: #1e293b;        
 
-  --bg-body: #f8fafc;
-  --bg-card: #ffffff;
+  --bg-body: #ffffff;      
+  --bg-card: #ffffff;      
   --text-main: #334155;
   --text-muted: #64748b;
 
-  --radius: 20px;
-  --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+  --radius: 8px; 
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  
+  --nav-height: 90px; /* Altezza Navbar PC */
 }
 
-[data-theme='dark'] {
-  --primary: #ef4444;
-  --primary-hover: #dc2626;
-  --accent: #f1f5f9;
-
-  --bg-body: #0f172a;
-  --bg-card: #1e293b;
-
-  --text-main: #f8fafc;
-  --text-muted: #cbd5e1;
-
-  --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
-}
-
-/* Transizioni globali fluide */
+/* --- RESET & BASE --- */
 *, *::before, *::after {
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
   box-sizing: border-box;
 }
 
-body {
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
   font-family: 'Montserrat', sans-serif;
   overflow-x: hidden;
+  background-color: var(--bg-body); 
+  color: var(--text-main);
+  min-height: 100vh;
 }
 
-/* HERO */
-.hero-section {
+/* =========================================
+   1. HERO BANNER (Home)
+   ========================================= */
+.hero-full-width {
+  position: relative;
+  width: 100%; 
+  margin: 0; 
+  margin-top: var(--nav-height); /* Stacco dalla navbar */
+  
+  /* Altezza PC */
+  height: 70vh; 
+  min-height: 550px;
+  
+  background-size: cover;
+  background-position: center bottom; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4rem;
+  background-color: var(--accent);
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5); /* Velo scuro */
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: white;
+  padding: 0 1.5rem;
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* TITOLO RESPONSIVE (Fix Mobile) */
+.hero-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800; /* Bello cicciotto */
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 0;
+  color: #ffffff;
+  text-shadow: 0 4px 15px rgba(0,0,0,0.6);
+  line-height: 1.1;
+  
+  /* Dimensione base PC */
+  font-size: 3.5rem; 
+}
+
+.hero-subtitle-text {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  font-weight: 300; 
+  color: #f1f5f9;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* --- MEDIA QUERY HERO (Fix Mobile) --- */
+@media (max-width: 768px) {
+  .hero-full-width {
+    height: 500px; /* Altezza fissa su mobile */
+    background-position: center center;
+  }
+
+  .hero-title {
+    /* Riduciamo drasticamente il font su mobile per far entrare la parola */
+    font-size: 1.8rem; 
+    letter-spacing: 1px;
+  }
+
+  .hero-subtitle-text {
+    font-size: 0.9rem;
+  }
+}
+
+/* =========================================
+   2. SEZIONI STANDARD
+   ========================================= */
+.intro-section {
+  max-width: 900px;
+  margin: 0 auto 5rem auto;
+  text-align: center;
+  padding: 0 2rem;
+}
+
+.intro-text {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  font-style: italic;
+  font-weight: 400; 
+  line-height: 1.8;
+  margin-bottom: 2rem;
+}
+
+.intro-divider {
+  font-weight: 700;
+  color: var(--text-main);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* =========================================
+   3. CARD & GRIGLIE
+   ========================================= */
+.values-grid, .services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 3rem;
+  max-width: 1200px;
+  margin: 0 auto 6rem auto;
+  padding: 0 2rem;
+}
+
+/* Card Home */
+.value-card {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 10rem 2rem 4rem 2rem;
+}
+.value-image-box {
   width: 100%;
+  height: 220px;
+  background-color: #eee;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 1.2rem;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
 }
+.value-image-box img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+.value-card:hover .value-image-box img { transform: scale(1.05); }
+.value-title { font-size: 1.1rem; font-weight: 700; color: var(--primary); text-transform: uppercase; margin-bottom: 0.5rem; }
 
-.hero-huge-text {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 900;
-  line-height: 1.1;
-  margin-bottom: 1rem;
-  font-size: clamp(3rem, 8vw, 6rem) !important;
-}
-
-.hero-subtitle {
-  font-size: 1.3rem;
-  color: var(--text-muted);
-  max-width: 600px;
-}
-
-/* BANNER */
-.banner-section {
-  width: 90%;
-  max-width: 1200px;
-  height: 250px;
-  margin: 2rem auto 5rem auto;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-color: white;
-}
-
-/* GRIGLIA INTELLIGENTE */
-.services-grid {
-  display: grid;
-  gap: 4rem;
-  margin-top: 3rem;
-  justify-content: center;
-  padding: 0 2rem;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  max-width: 1400px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-@media (min-width: 1100px) {
-  .services-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .services-grid:has(> :nth-last-child(4):first-child) {
-    grid-template-columns: repeat(2, 1fr);
-    max-width: 900px;
-  }
-}
-
-/* CARD */
+/* Card Servizi/Contatti */
 .card-service {
-  background: var(--bg-card);
-  border-radius: var(--radius);
-  padding: 2.5rem;
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 2.5rem 1.5rem;
   text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
   display: flex;
   flex-direction: column;
   align-items: center;
   height: 100%;
+  border: 1px solid #f1f5f9;
 }
-
 .icon-wrapper {
   color: var(--primary);
   margin-bottom: 1.5rem;
-  background: rgba(185, 28, 28, 0.1);
-  padding: 1.2rem;
+  background: rgba(185, 28, 28, 0.05);
+  width: 70px; height: 70px;
   border-radius: 50%;
-  display: inline-flex;
+  display: flex; align-items: center; justify-content: center;
 }
 
-/* BOTTONI */
-.btn {
-  display: block;
+/* =========================================
+   4. SEZIONE STUDIO
+   ========================================= */
+.studio-section-wrapper {
+  background-color: #f8fafc;
   width: 100%;
-  padding: 1.2rem;
-  margin-top: auto;
-  border-radius: 12px;
-  border: none;
-  font-size: 1rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  cursor: pointer;
-  text-decoration: none;
-  transition: opacity 0.2s, transform 0.2s;
-  text-align: center;
+  padding: 5rem 1rem;
+  margin-bottom: 5rem;
 }
 
-.btn:hover { opacity: 0.9; transform: scale(1.02); }
-
-.btn-studio { background-color: var(--primary); color: white; }
-.btn-whatsapp { background-color: #25D366; color: white; }
-.btn-social { background-color: var(--accent); color: var(--bg-card); }
-
-.theme-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--text-main);
-  padding: 0.5rem;
-}
-
-/* MAPPA / FOOTER SECTION */
-.map-section {
-  background: var(--bg-card);
-  padding: 1rem;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  margin: 6rem auto 4rem auto;
-  max-width: 1000px;
-  width: 90%;
-}
-
-.site-footer {
-  text-align: center;
-  padding: 2rem;
-  color: var(--text-muted);
-  font-size: 0.9rem;
-  margin-top: auto;
-  border-top: 1px solid rgba(0,0,0,0.05);
-}
-
-.theme-floating-btn {
-  position: absolute;
-  top: 1.5rem;
-  right: 2rem;
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  background: var(--bg-card);
-  border: 1px solid rgba(0,0,0,0.1);
-  color: var(--text-main);
-  cursor: pointer;
+.studio-container {
+  max-width: 1100px;
+  margin: 0 auto;
   display: flex;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  
-  /* FIX 1: Z-Index altissimo per essere sempre cliccabile sopra la navbar */
-  z-index: 2000; 
-  
-  transition: transform 0.2s, background-color 0.3s;
+  gap: 4rem;
 }
 
-.theme-floating-btn:hover {
-  transform: scale(1.1);
-  background: var(--primary);
-  color: white;
-  border-color: var(--primary);
+.studio-text-col { flex: 1; text-align: left; }
+.studio-text-col h2.section-title {
+  color: var(--primary); font-size: 2.2rem; margin-bottom: 1.5rem;
+  text-transform: uppercase; font-weight: 800; margin-top: 0;
+}
+.studio-text-col p {
+  color: var(--text-muted); font-size: 1rem; line-height: 1.6; margin-bottom: 1rem;
+}
+.studio-img-col {
+  flex: 1; height: 350px; border-radius: 6px; overflow: hidden; box-shadow: var(--shadow);
+}
+.studio-img-col img { width: 100%; height: 100%; object-fit: cover; }
+
+/* =========================================
+   5. BOTTONI & MAPPA
+   ========================================= */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 0.8rem 2rem; margin-top: auto; width: 100%;
+  border-radius: 6px; border: none;
+  font-size: 0.9rem; font-weight: 700; text-transform: uppercase;
+  cursor: pointer; text-decoration: none; color: white !important;
+  transition: all 0.2s ease;
+}
+.btn:hover { opacity: 0.9; transform: translateY(-2px); }
+.btn-studio { background-color: var(--primary); }
+.btn-whatsapp { background-color: #25D366; }
+.btn-social { background-color: #1e293b; }
+
+.map-section {
+  background: white; padding: 1rem; border-radius: 8px;
+  box-shadow: var(--shadow); margin: 0 auto 4rem auto;
+  max-width: 1000px; width: 90%;
 }
 
-/* FIX MOBILE: Posizionamento corretto a sinistra del menu */
-@media (max-width: 768px) {
-  .theme-floating-btn {
-    top: 1rem;     
-    right: 5rem;   /* Spostato a sinistra per non toccare il menu burger */
-    width: 42px;
-    height: 42px;
-  }
+@media (max-width: 900px) {
+  :root { --nav-height: 80px; }
+  .studio-container { flex-direction: column-reverse; gap: 2rem; }
+  .studio-text-col { text-align: center; }
+  .studio-img-col { width: 100%; height: 250px; }
 }
