@@ -1,4 +1,5 @@
 import { Building2, ClipboardCheck, Percent, BookOpen, Droplet, HandCoins } from 'lucide-react';
+import { Link } from 'react-router-dom'; // Importante per il collegamento interno
 
 export function Servizi() {
   const services = [
@@ -32,6 +33,17 @@ export function Servizi() {
             <p style={{ fontSize: '1rem', color: 'var(--text-muted)', margin: 0, lineHeight: '1.6' }}>{service.text}</p>
           </div>
         ))}
+      </div>
+
+      {/* --- NUOVA SEZIONE BOTTONE CONTATTI --- */}
+      <div style={{ marginTop: '4rem', display: 'flex', justifyContent: 'center' }}>
+        <Link 
+          to="/contatti" 
+          className="btn btn-studio" 
+          style={{ maxWidth: '250px', padding: '1rem 3rem' }}
+        >
+          CONTATTACI
+        </Link>
       </div>
 
     </div>

@@ -94,7 +94,7 @@ export function Home() {
         </p>     
         <div style={{ marginTop: '2rem', borderRadius: '4px', overflow: 'hidden', border: '1px solid #e2e8f0' }}>
           <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3005.123!2d16.8!3d41.1!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDHCsDA2JzAwLjAiTiAxNsKwNDgnMDAuMCJF!5e0!3m2!1sit!2sit!4v1234567890" 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2999.040498497081!2d15.896046529345712!3d41.26445411033164!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x133831f43d8a1f99%3A0xc47b6d95dbd09e3a!2sGestione%20condominiali%20Da.Ma.%20Srls%20amministratore%20unico%20Tannoia%20Giuseppe!5e0!3m2!1sit!2sit!4v1767985118421!5m2!1sit!2sit" 
             width="100%" 
             height="400" 
             style={{ border: 0 }} 
