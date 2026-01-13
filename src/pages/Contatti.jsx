@@ -1,73 +1,87 @@
-import { Linkedin, Instagram, Phone, MessageCircle } from 'lucide-react';
+import { Linkedin, Instagram, Phone, MessageCircle, Facebook } from 'lucide-react';
 
 export function Contatti() {
-  return (
-    // AGGIUNTO padding-top: '8rem' per evitare che la navbar copra il titolo
-    <div style={{ maxWidth: '1000px', margin: '0 auto', textAlign: 'center', paddingTop: '8rem' }}>
+  const contactMethods = [
+    {
+      title: "Chiama lo Studio",
+      icon: <Phone size={40} />,
+      desc: "Per informazioni, appuntamenti e consulenze amministrative.",
+      btnText: "Chiamaci",
+      link: "tel:0885449465",
+      color: "var(--primary)",
+      bg: "rgba(185, 28, 28, 0.1)",
+      btnClass: "btn-studio"
+    },
+    {
+      title: "WhatsApp",
+      icon: <MessageCircle size={40} />,
+      desc: "Per urgenze, segnalazioni guasti o invio rapido documenti.",
+      btnText: "Scrivici",
+      link: "https://wa.me/393284132092",
+      color: "#25D366",
+      bg: "rgba(37, 211, 102, 0.1)",
+      btnClass: "btn-whatsapp"
+    },
+    {
+      title: "Facebook",
+      icon: <Facebook size={40} />,
+      desc: "Resta aggiornato sulle novità tramite la nostra pagina ufficiale.",
+      btnText: "Seguici",
+      link: "https://www.facebook.com/share/1E2txQ7zF9/?mibextid=wwXIfr",
+      color: "#1877F2",
+      bg: "rgba(24, 119, 242, 0.1)",
+      btnStyle: { backgroundColor: '#1877F2' }
+    },
+    {
+      title: "LinkedIn",
+      icon: <Linkedin size={40} />,
+      desc: "Segui il nostro profilo professionale per aggiornamenti.",
+      btnText: "Collegati",
+      link: "https://www.linkedin.com/company/da-ma/",
+      color: "#0a66c2",
+      bg: "rgba(10, 102, 194, 0.1)",
+      btnStyle: { backgroundColor: '#0a66c2' }
+    },
+    {
+      title: "Instagram",
+      icon: <Instagram size={40} />,
+      desc: "Scopri le nostre attività e i retroscena dello studio.",
+      btnText: "Seguici",
+      link: "https://www.instagram.com/damacondomini?igsh=MXhlempwbDlpYzlleA==",
+      color: "#E1306C",
+      bg: "rgba(225, 48, 108, 0.1)",
+      btnStyle: { backgroundColor: '#E1306C' }
+    }
+  ];
 
-      <div style={{ marginBottom: '3rem' }}>
-        <h1 style={{ color: 'var(--primary)', fontSize: '2.5rem', marginBottom: '0.5rem' }}>Contattaci</h1>
+  return (
+    <div style={{ paddingTop: '8rem', paddingBottom: '4rem' }}>
+      <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+        <h1 style={{ color: 'var(--primary)', fontSize: '2.5rem', fontWeight: '800', marginBottom: '0.5rem' }}>CONTATTACI</h1>
         <p style={{ color: 'var(--text-muted)', fontSize: '1.1rem' }}>Scegli il modo più comodo per parlare con noi</p>
       </div>
 
       <div className="services-grid">
-
-        {/* Box Chiama */}
-        <div className="card-service">
-          <div className="icon-wrapper">
-            <Phone size={40} />
+        {contactMethods.map((method, index) => (
+          <div key={index} className="card-service">
+            <div className="icon-wrapper" style={{ color: method.color, background: method.bg }}>
+              {method.icon}
+            </div>
+            <h3 style={{ margin: '1rem 0', color: 'var(--text-main)', fontSize: '1.4rem' }}>{method.title}</h3>
+            <p style={{ color: 'var(--text-muted)', marginBottom: '1.5rem', fontSize: '0.95rem', lineHeight: '1.5' }}>
+              {method.desc}
+            </p>
+            <a 
+              href={method.link} 
+              target={method.link.startsWith('http') ? "_blank" : "_self"} 
+              rel="noopener noreferrer"
+              className={`btn ${method.btnClass || ''}`}
+              style={method.btnStyle}
+            >
+              {method.btnText.toUpperCase()}
+            </a>
           </div>
-          <h3 style={{ margin: '1rem 0', color: 'var(--text-main)', fontSize: '1.4rem' }}>Chiama lo Studio</h3>
-          <p style={{ color: 'var(--text-muted)', marginBottom: '1.5rem' }}>
-            Per informazioni, appuntamenti e consulenze amministrative.
-          </p>
-          <a href="tel:0885449465" className="btn btn-studio">
-            CHIAMACI
-          </a>
-        </div>
-
-        {/* Box WhatsApp */}
-        <div className="card-service">
-          <div className="icon-wrapper" style={{ color: '#25D366', background: 'rgba(37, 211, 102, 0.1)' }}>
-            <MessageCircle size={40} />
-          </div>
-          <h3 style={{ margin: '1rem 0', color: 'var(--text-main)', fontSize: '1.4rem' }}>WhatsApp</h3>
-          <p style={{ color: 'var(--text-muted)', marginBottom: '1.5rem' }}>
-            Per urgenze, segnalazioni guasti o invio rapido documenti.
-          </p>
-          <a href="https://wa.me/393284132092" target="_blank" className="btn btn-whatsapp">
-            SCRIVICI
-          </a>
-        </div>
-
-        {/* Box LinkedIn */}
-        <div className="card-service">
-          <div className="icon-wrapper" style={{ color: '#0a66c2', background: 'rgba(10, 102, 194, 0.1)' }}>
-            <Linkedin size={40} />
-          </div>
-          <h3 style={{ margin: '1rem 0', color: 'var(--text-main)', fontSize: '1.4rem' }}>LinkedIn</h3>
-          <p style={{ color: 'var(--text-muted)', marginBottom: '1.5rem' }}>
-            Segui il nostro profilo professionale per aggiornamenti.
-          </p>
-          <a href="https://www.linkedin.com/company/da-ma/" target="_blank" className="btn btn-social" style={{ backgroundColor: '#0a66c2', color: 'white' }}>
-            COLLEGATI
-          </a>
-        </div>
-
-        {/* Box Instagram */}
-        <div className="card-service">
-          <div className="icon-wrapper" style={{ color: '#E1306C', background: 'rgba(225, 48, 108, 0.1)' }}>
-            <Instagram size={40} />
-          </div>
-          <h3 style={{ margin: '1rem 0', color: 'var(--text-main)', fontSize: '1.4rem' }}>Instagram</h3>
-          <p style={{ color: 'var(--text-muted)', marginBottom: '1.5rem' }}>
-            Scopri le nostre attività e i retroscena dello studio.
-          </p>
-          <a href="https://www.instagram.com/damacondomini?igsh=MXhlempwbDlpYzlleA==" target="_blank" className="btn btn-social" style={{ backgroundColor: '#E1306C', color: 'white' }}>
-            SEGUICI
-          </a>
-        </div>
-
+        ))}
       </div>
     </div>
   );
