@@ -2,7 +2,7 @@ import mainBanner from '../images/cerignola.jpg';
 import imgCompetenza from '../images/competenza.png';    
 import imgTrasparenza from '../images/trasparenza.jpg';   
 import imgProfessionalita from '../images/professionalita.jpg'; 
-import imgStudio from '../images/dama.png';        
+import imgStudio from '../images/dama.png';         
 import imgGiuseppe from '../images/papa.jpg'; 
 
 export function Home() {
@@ -20,7 +20,20 @@ export function Home() {
         <div className="hero-overlay" style={{ backgroundColor: 'rgba(0,0,0,0.6)' }}></div>
         <div className="hero-content">
           <h1 className="hero-title">AMMINISTRAZIONE<br />CONDOMINIALE</h1>
-          <p className="hero-subtitle-text">DA.MA. SRLS - Giuseppe Tannoia</p>
+          <p className="hero-subtitle-text">DA.MA. SRLS</p>
+        </div>
+      </div>
+
+      {/* FASCIA PROPRIETARIO (Modificata per essere più grande) */}
+      <div className="owner-strip">
+        <div className="owner-strip-content">
+          <div className="owner-image-wrapper">
+            <img src={imgGiuseppe} alt="Giuseppe Tannoia" />
+          </div>
+          <div className="owner-info">
+            <h2>Giuseppe Tannoia</h2>
+            <p>Amministratore Unico & Fondatore</p>
+          </div>
         </div>
       </div>
 
@@ -44,28 +57,11 @@ export function Home() {
         ))}
       </div>
 
-      {/* 4. SEZIONE STUDIO - FOTO PROFILO GRANDE */}
+      {/* 4. SEZIONE STUDIO */}
       <div className="studio-section-wrapper">
         <div className="studio-container">
           <div className="studio-text-col">
-            <div className="profile-header" style={{ display: 'flex', alignItems: 'center', gap: '2rem', marginBottom: '2rem', flexWrap: 'wrap' }}>
-              <img 
-                src={imgGiuseppe} 
-                alt="Giuseppe Tannoia" 
-                style={{ 
-                  width: '150px', 
-                  height: '150px', 
-                  borderRadius: '50%', 
-                  objectFit: 'cover', 
-                  border: '4px solid var(--primary)',
-                  boxShadow: '0 8px 20px rgba(185, 28, 28, 0.2)' 
-                }} 
-              />
-              <div>
-                <h2 className="section-title" style={{ margin: 0 }}>Lo Studio DA.MA.</h2>
-                <p style={{ color: 'var(--primary)', fontWeight: '700', fontSize: '1.2rem', margin: '5px 0 0 0' }}>Giuseppe Tannoia</p>
-              </div>
-            </div>
+            <h2 className="section-title">Lo Studio DA.MA.</h2>
             <p>
               Siamo un punto di riferimento per l'amministrazione immobiliare. 
               Il nostro obiettivo è garantire la <strong>massima serenità</strong> ai condomini attraverso una gestione trasparente e moderna.
